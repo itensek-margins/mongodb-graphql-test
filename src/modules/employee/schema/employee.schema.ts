@@ -21,6 +21,7 @@ export class Employee implements IEmployee{
 
   @Prop({
     required: true,
+    unique: true,
     type: String,
   })
   email: string;
