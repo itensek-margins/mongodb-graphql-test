@@ -15,7 +15,7 @@ export abstract class AbstractCrudService<T, U>
 {
   protected constructor(
     protected readonly _logger: Logger,
-    protected readonly _repository: AbstractRepository<U>
+    protected readonly _repository: AbstractRepository<U>,
   ) {}
 
   abstract create(...args: any[]): Promise<T>;

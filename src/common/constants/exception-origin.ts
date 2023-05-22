@@ -1,7 +1,6 @@
 export enum ExceptionOrigin {
-    Http = 'HTTP',
-    Mongo = 'Mongo',
-    TestProject = 'TestProject',
-    Unknown = 'Unknown'
-  }
-  
+  Http = 'HTTP',
+  Mongo = 'Mongo',
+  TestProject = 'TestProject',
+  Unknown = 'Unknown',
+}

@@ -1,6 +1,6 @@
-import { Type } from "class-transformer";
-import { IsEnum, IsNumber, IsString, ValidateNested } from "class-validator";
-import { Environment } from "../constants/env";
+import { Type } from 'class-transformer';
+import { IsEnum, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { Environment } from '../constants/env';
 
 export class AppConfig {
   @IsNumber()

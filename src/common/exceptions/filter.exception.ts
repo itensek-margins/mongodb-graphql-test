@@ -8,21 +8,20 @@ import {
   HttpException,
   Inject,
   InternalServerErrorException,
-  LoggerService
+  LoggerService,
 } from '@nestjs/common';
 
 import { Response } from 'express';
 
-import {
-  TestProjectException,
-} from './custom.exception';
+import { TestProjectException } from './custom.exception';
 import { IExceptionData } from './exception-data.interface';
 import { ExceptionOrigin } from '../constants/exception-origin';
 
 @Catch()
 export class GlobalExceptionFilter implements ExceptionFilter {
   constructor(
-    @Inject(WINSTON_MODULE_NEST_PROVIDER) private readonly logger: LoggerService
+    @Inject(WINSTON_MODULE_NEST_PROVIDER)
+    private readonly logger: LoggerService,
   ) {}
 
   /**
@@ -36,7 +35,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
 
     if (!handler) {
       handler = new InternalServerErrorException(
-        'Something went wrong, please try again'
+        'Something went wrong, please try again',
       );
     }
 
@@ -48,14 +47,14 @@ export class GlobalExceptionFilter implements ExceptionFilter {
    * TODO Replace the "ProjectAbbrv" with your project's name.
    */
   private projectAbbrvErrorHandler(
-    exception: TestProjectException
+    exception: TestProjectException,
   ): IExceptionData {
     return {
       origin: ExceptionOrigin.TestProject,
       statusCode: +exception.exceptionInfo.status,
       code: exception.exceptionInfo.code,
       title: exception.exceptionName,
-      message: exception.exceptionInfo.detail
+      message: exception.exceptionInfo.detail,
     };
   }
 
@@ -68,7 +67,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       statusCode: exception.getStatus(),
       code: 'HTTP-0000',
       title: exception.getResponse()['error'] || 'Internal Server Exception',
-      message: exception.getResponse()['message'] || 'Something went wrong'
+      message: exception.getResponse()['message'] || 'Something went wrong',
     };
   }
 
@@ -85,7 +84,7 @@ export class GlobalExceptionFilter implements ExceptionFilter {
       statusCode: 500,
       code: '000',
       title: 'Internal Server Exception',
-      message: 'Something went wrong'
+      message: 'Something went wrong',
     };
 
     // Handle Project-specific Exceptions

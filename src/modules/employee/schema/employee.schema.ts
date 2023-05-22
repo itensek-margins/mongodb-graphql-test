@@ -4,11 +4,11 @@ import { IEmployee } from '../interface/employee.interface';
 
 export type EmployeeDocument = HydratedDocument<Employee>;
 
-@Schema({ timestamps: true})
-export class Employee implements IEmployee{
+@Schema({ timestamps: true })
+export class Employee implements IEmployee {
   @Prop({
     required: true,
-    type: String
+    type: String,
   })
   name: string;
 

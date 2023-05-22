@@ -7,8 +7,8 @@ export class AppService {
 
   getInitialData(): any {
     return {
-      name: "Test Project API",
-      version: process.env.PROJECT_VERSION,
+      name: 'Test Project API',
+      version: this.config.application.PROJECT_VERSION,
     };
   }
 }

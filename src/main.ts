@@ -26,10 +26,10 @@ async function bootstrap() {
           }
         }
 
-        return new TestProjectValidationException(msg ?? defaultMsg)
-      }
-    })
-  )
+        return new TestProjectValidationException(msg ?? defaultMsg);
+      },
+    }),
+  );
   await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

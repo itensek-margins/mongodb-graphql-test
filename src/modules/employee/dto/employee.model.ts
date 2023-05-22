@@ -3,7 +3,7 @@ import { IEmployee } from '../interface/employee.interface';
 import { Types } from 'mongoose';
 
 @ObjectType()
-export class EmployeeModel implements IEmployee{
+export class EmployeeModel implements IEmployee {
   @Field(() => String)
   _id?: string | Types.ObjectId;
 
@@ -16,6 +16,6 @@ export class EmployeeModel implements IEmployee{
   @Field()
   email: string;
 
-  @Field({nullable: true})
+  @Field({ nullable: true })
   address?: string;
 }

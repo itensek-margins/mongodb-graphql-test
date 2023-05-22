@@ -12,42 +12,45 @@ import * as winston from 'winston';
 import { WinstonModule, utilities as winstonUtilities } from 'nest-winston';
 import { StatusMonitorModule } from 'nestjs-status-monitor';
 import { EmployeeModule } from './modules/employee/employee.module';
-import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
+import {
+  ApolloServerPluginLandingPageLocalDefault,
+  ApolloServerPluginLandingPageProductionDefault,
+} from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
-    driver: ApolloDriver,
-    autoSchemaFile: 'src/schema.gql',
-    playground: false,
-    plugins: [
-      process.env.NODE_ENV === 'production'
+      driver: ApolloDriver,
+      autoSchemaFile: 'src/schema.gql',
+      playground: false,
+      plugins: [
+        process.env.NODE_ENV === 'production'
           ? ApolloServerPluginLandingPageProductionDefault()
           : ApolloServerPluginLandingPageLocalDefault(),
-    ]
-  }), 
-  TypedConfigModule.forRoot({
-    schema: RootConfig,
-    load: dotenvLoader({ separator: '_' })
-  }),
+      ],
+    }),
+    TypedConfigModule.forRoot({
+      schema: RootConfig,
+      load: dotenvLoader({ separator: '_' }),
+    }),
 
-  // Status Monitor
-  StatusMonitorModule.forRoot(),
+    // Status Monitor
+    StatusMonitorModule.forRoot(),
 
-  // Logger
-  WinstonModule.forRoot({
-    transports: [
-      new winston.transports.Console({
-        format: winston.format.combine(
-          winston.format.timestamp({ format: 'DD/MM/YYYY HH:MM:SS' }),
-          winstonUtilities.format.nestLike('JHLA', {
-            colors: true,
-            prettyPrint: true
-          })
-        )
-      })
-    ]
-  }),
+    // Logger
+    WinstonModule.forRoot({
+      transports: [
+        new winston.transports.Console({
+          format: winston.format.combine(
+            winston.format.timestamp({ format: 'DD/MM/YYYY HH:MM:SS' }),
+            winstonUtilities.format.nestLike('JHLA', {
+              colors: true,
+              prettyPrint: true,
+            }),
+          ),
+        }),
+      ],
+    }),
     MongooseModule.forRoot(<string>process.env.DB_URI, {
       retryAttempts: 3,
       retryDelay: 500,
@@ -62,7 +65,7 @@ import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPag
     {
       provide: APP_FILTER,
       useClass: GlobalExceptionFilter,
-    }
+    },
   ],
 })
 export class AppModule {}

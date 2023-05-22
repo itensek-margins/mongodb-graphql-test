@@ -15,7 +15,7 @@ import {
   QueryOptions,
   Types,
   UpdateQuery,
-  UpdateWriteOpResult
+  UpdateWriteOpResult,
 } from 'mongoose';
 
 import { BaseRepository } from '../interfaces/base/repository.base.interface';
@@ -25,7 +25,7 @@ export abstract class AbstractRepository<T> implements BaseRepository<T> {
   constructor(protected readonly entity: Model<T>) {}
 
   public async createOne(
-    data: AnyObject | AnyKeys<Document<T>>
+    data: AnyObject | AnyKeys<Document<T>>,
   ): Promise<HydratedDocument<T>> {
     return await this.entity.create(data);
   }
@@ -33,7 +33,7 @@ export abstract class AbstractRepository<T> implements BaseRepository<T> {
   public async findMany(
     filter: FilterQuery<T> = {},
     projection: string | null = null,
-    options?: QueryOptions
+    options?: QueryOptions,
   ): Promise<Document<T>[]> {
     return await this.entity.find(filter, projection, options);
   }
@@ -41,7 +41,7 @@ export abstract class AbstractRepository<T> implements BaseRepository<T> {
   public async findManyLean(
     filter: FilterQuery<T> = {},
     projection: string | null = null,
-    options?: QueryOptions
+    options?: QueryOptions,
   ): Promise<T[]> {
     return await this.entity.find(filter, projection, options).lean();
   }
@@ -49,7 +49,7 @@ export abstract class AbstractRepository<T> implements BaseRepository<T> {
   public async findOne(
     filter: FilterQuery<T> = {},
     projection?: string,
-    options?: QueryOptions
+    options?: QueryOptions,
   ): Promise<(T & Document<T>) | null | undefined> {
     return await this.entity.findOne(filter, projection, options);
   }
@@ -57,25 +57,25 @@ export abstract class AbstractRepository<T> implements BaseRepository<T> {
   public async findOneLean(
     filter: FilterQuery<T> = {},
     projection?: string,
-    options?: QueryOptions
+    options?: QueryOptions,
   ): Promise<T> {
     return await this.entity.findOne(filter, projection, options).lean();
   }
 
   public async updateOneById(
     id: string,
-    update: UpdateQuery<T>
+    update: UpdateQuery<T>,
   ): Promise<T | null> {
     return await this.entity.findOneAndUpdate(
       { _id: new Types.ObjectId(id) },
       update,
-      { new: true }
+      { new: true },
     );
   }
 
   public async updateMany(
     query: FilterQuery<T>,
-    data: UpdateQuery<T>
+    data: UpdateQuery<T>,
   ): Promise<Query<UpdateWriteOpResult, T & Document>> {
     return await this.entity.updateMany(query, data);
   }
