@@ -12,16 +12,23 @@ type EmployeeModel {
 
 type Query {
   getEmployees: [EmployeeModel!]!
-  getEmployee(_id: String!): EmployeeModel!
+  getEmployee(id: String!): EmployeeModel!
 }
 
 type Mutation {
   createEmployee(employeeInput: EmployeeInput!): EmployeeModel!
-  updateEmployee(id: String!, employeeInput: EmployeeInput): EmployeeModel!
+  updateEmployee(id: String!, employeeInput: EmployeeUpdateInput!): EmployeeModel!
   deleteEmployee(id: String!): EmployeeModel!
 }
 
 input EmployeeInput {
+  name: String!
+  age: Float!
+  email: String!
+  address: String!
+}
+
+input EmployeeUpdateInput {
   name: String!
   age: Float!
   email: String!

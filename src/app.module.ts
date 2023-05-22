@@ -12,13 +12,19 @@ import * as winston from 'winston';
 import { WinstonModule, utilities as winstonUtilities } from 'nest-winston';
 import { StatusMonitorModule } from 'nestjs-status-monitor';
 import { EmployeeModule } from './modules/employee/employee.module';
-
+import { ApolloServerPluginLandingPageLocalDefault, ApolloServerPluginLandingPageProductionDefault } from '@apollo/server/plugin/landingPage/default';
 
 @Module({
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
     driver: ApolloDriver,
     autoSchemaFile: 'src/schema.gql',
+    playground: false,
+    plugins: [
+      process.env.NODE_ENV === 'production'
+          ? ApolloServerPluginLandingPageProductionDefault()
+          : ApolloServerPluginLandingPageLocalDefault(),
+    ]
   }), 
   TypedConfigModule.forRoot({
     schema: RootConfig,
