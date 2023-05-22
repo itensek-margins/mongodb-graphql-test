@@ -1,4 +1,4 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ObjectType, Field } from '@nestjs/graphql';
 import { IEmployee } from '../interface/employee.interface';
 import { Types } from 'mongoose';
 

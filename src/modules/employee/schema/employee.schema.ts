@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 import { IEmployee } from '../interface/employee.interface';
-import { Field } from '@nestjs/graphql';
 
 export type EmployeeDocument = HydratedDocument<Employee>;
 

@@ -11,7 +11,6 @@ import { TypedConfigModule, dotenvLoader } from 'nest-typed-config';
 import * as winston from 'winston';
 import { WinstonModule, utilities as winstonUtilities } from 'nest-winston';
 import { StatusMonitorModule } from 'nestjs-status-monitor';
-import { Employee } from './modules/employee/schema/employee.schema';
 import { EmployeeModule } from './modules/employee/employee.module';
 
 

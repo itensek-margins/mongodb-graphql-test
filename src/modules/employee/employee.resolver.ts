@@ -1,9 +1,7 @@
 import { AbstractEmployeeResolver } from "./abstract/employee.abstract.resolver";
 import { Args, Mutation, Query, Resolver } from "@nestjs/graphql";
 import { EmployeeInput } from "./dto/employee.dto";
-import { IEmployee } from "./interface/employee.interface";
 import { AbstractEmployeeService } from "./abstract/employee.abstract.service";
-import { Employee } from "./schema/employee.schema";
 import { EmployeeModel } from "./dto/employee.model";
 
 @Resolver(() => EmployeeInput)
