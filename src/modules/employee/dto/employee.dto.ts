@@ -10,13 +10,13 @@ export class EmployeeInput implements IEmployee {
   name: string;
 
   @Field()
-  @IsNumber()
+  @IsNumber({}, {message: "Age should be a number"})
   @IsNotEmpty({ message: 'Please provide age' })
-  @Min(18)
+  @Min(18, {message: "Minimum age allowed is 18"})
   age: number;
 
   @Field()
-  @IsEmail()
+  @IsEmail({}, {message: "Email is not valid"})
   @IsNotEmpty({ message: 'Please provide e-mail address' })
   email: string;
 
