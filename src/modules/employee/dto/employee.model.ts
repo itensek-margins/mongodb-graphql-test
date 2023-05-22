@@ -16,6 +16,6 @@ export class EmployeeModel implements IEmployee{
   @Field()
   email: string;
 
-  @Field()
-  address: string;
+  @Field({nullable: true})
+  address?: string;
 }

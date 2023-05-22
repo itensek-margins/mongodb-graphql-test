@@ -6,7 +6,6 @@ import { IEmployee } from "../interface/employee.interface";
 import { Employee } from "../schema/employee.schema";
 import { FilterQuery, QueryOptions } from "mongoose";
 import { TestProjectConflictException, TestProjectNotFoundException } from "src/common/exceptions/custom.exception";
-import { EmployeeModel } from "../dto/employee.model";
 
 @Injectable()
 export class EmployeeService extends AbstractEmployeeService {
@@ -50,9 +49,8 @@ export class EmployeeService extends AbstractEmployeeService {
     }
 
     private async checkId(id: string): Promise<void> {
-        const existingEmployees = await this._repository.findManyLean();
-        const employeeExists = existingEmployees.some((employee) => employee._id === id);
-        if (!employeeExists) {
+        const count = await this._repository.count({_id: id});
+        if (!count) {
             throw new TestProjectNotFoundException("Employee with the given id does not exist")
         }
     }

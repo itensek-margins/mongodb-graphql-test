@@ -7,7 +7,7 @@ type EmployeeModel {
   name: String!
   age: Float!
   email: String!
-  address: String!
+  address: String
 }
 
 type Query {
@@ -25,12 +25,12 @@ input EmployeeInput {
   name: String!
   age: Float!
   email: String!
-  address: String!
+  address: String
 }
 
 input EmployeeUpdateInput {
-  name: String!
-  age: Float!
-  email: String!
-  address: String!
+  name: String
+  age: Float
+  email: String
+  address: String
 }

@@ -4,24 +4,24 @@ import { IEmployeeEditableAttributes } from '../interface/employee-editable-atri
 
 @InputType()
 export class EmployeeUpdateInput implements IEmployeeEditableAttributes {
-  @Field()
+  @Field({nullable: true})
   @IsString({ message: 'Name should be a string' })
   @IsOptional()
-  name: string;
+  name?: string;
 
-  @Field()
+  @Field({nullable: true})
   @IsNumber({}, {message: "Age should be a number"})
   @Min(18, {message: "Minimum age allowed is 18"})
   @IsOptional()
-  age: number;
+  age?: number;
 
-  @Field()
+  @Field({nullable: true})
   @IsEmail({}, {message: "Email is not valid"})
   @IsOptional()
-  email: string;
+  email?: string;
 
-  @Field()
+  @Field({nullable: true})
   @IsString({ message: 'Address should be a string' })
   @IsOptional()
-  address: string;
+  address?: string;
 }
