@@ -19,6 +19,9 @@ export class AppConfig {
 export class DbConfig {
   @IsString()
   public readonly DB_URI!: string;
+
+  @IsString()
+  public readonly SECRET_KEY!: string;
 }
 
 export class RootConfig {

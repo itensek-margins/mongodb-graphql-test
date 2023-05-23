@@ -9,6 +9,7 @@ import {
   TestProjectConflictException,
   TestProjectNotFoundException,
 } from 'src/common/exceptions/custom.exception';
+import bcrypt from 'bcrypt';
 
 @Injectable()
 export class EmployeeService extends AbstractEmployeeService {
@@ -24,6 +25,7 @@ export class EmployeeService extends AbstractEmployeeService {
     if (emailCount) {
       throw new TestProjectConflictException('Email already exists');
     }
+    this.encryptPassword(employee.password);
     return await this._repository.createOne(employee);
   }
 
@@ -63,5 +65,12 @@ export class EmployeeService extends AbstractEmployeeService {
       );
     }
     return deletedEmployee;
+  }
+
+  private encryptPassword(password: string): void {
+    const saltRounds = 10;
+    bcrypt.hash(password, saltRounds, (err: Error, hash: string) => {
+      password = hash;
+    });
   }
 }

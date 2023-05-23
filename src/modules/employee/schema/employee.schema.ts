@@ -31,6 +31,19 @@ export class Employee implements IEmployee {
     type: String,
   })
   address: string;
+
+  @Prop({
+    required: true,
+    type: String,
+  })
+  password: string;
+
+  @Prop({
+    default: false,
+    required: true,
+    type: Boolean,
+  })
+  isVerified: boolean;
 }
 
 export const EmployeeSchema = SchemaFactory.createForClass(Employee);

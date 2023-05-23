@@ -18,4 +18,10 @@ export class EmployeeModel implements IEmployee {
 
   @Field({ nullable: true })
   address?: string;
+
+  @Field()
+  password: string;
+
+  @Field()
+  isVerified: boolean;
 }

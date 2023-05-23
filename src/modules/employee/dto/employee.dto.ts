@@ -4,6 +4,7 @@ import {
   IsNumber,
   IsOptional,
   IsString,
+  Matches,
   Min,
 } from 'class-validator';
 import { IEmployee } from '../interface/employee.interface';
@@ -31,4 +32,20 @@ export class EmployeeInput implements IEmployee {
   @IsString({ message: 'Address should be a string' })
   @IsOptional()
   address: string;
+
+  @Field({ nullable: false })
+  @IsString({ message: 'Password must be a string' })
+  @IsNotEmpty({ message: 'Please provide password' })
+  @Matches(
+    RegExp('(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'),
+    {
+      message:
+        'Password must be at least 8 characters long including one uppercase letter, one special character and alphanumeric characters',
+    },
+  )
+  password: string;
+
+  @Field({ nullable: false, defaultValue: false })
+  @IsString({ message: 'Address should be a string' })
+  isVerified: boolean;
 }

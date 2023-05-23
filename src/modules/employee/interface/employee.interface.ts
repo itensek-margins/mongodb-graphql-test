@@ -3,6 +3,8 @@ export interface IEmployee {
   age: number;
   email: string;
   address?: string;
+  password: string;
+  isVerified: boolean;
 
   createdAt?: Date;
   updatedAt?: Date;
