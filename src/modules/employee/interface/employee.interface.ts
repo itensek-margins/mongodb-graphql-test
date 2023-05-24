@@ -4,7 +4,7 @@ export interface IEmployee {
   email: string;
   address?: string;
   password: string;
-  isVerified: boolean;
+  isVerified?: boolean;
 
   createdAt?: Date;
   updatedAt?: Date;

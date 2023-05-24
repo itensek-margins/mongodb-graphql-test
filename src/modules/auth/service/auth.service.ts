@@ -3,7 +3,7 @@ import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AbstractEmployeeRepository } from 'src/modules/employee/abstract/employee.abstract.repository';
 import { AbstractAuthService } from '../abstract/auth.abstract.service';
 import { IEmployee } from 'src/modules/employee/interface/employee.interface';
-import bcrypt from 'bcrypt';
+import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
 import { IToken } from '../interface/token.interface';
 import { ILogin } from '../interface/login.interface';
@@ -21,14 +21,21 @@ export class AuthService extends AbstractAuthService {
   ) {
     super(logger, employeeRepository);
   }
+
   async login(loginInput: ILogin): Promise<IToken> {
-    const employee = await this._repository.findOne({
+    const employeeToVerify = await this._repository.findOne({
       email: loginInput.email,
     });
-    if (employee) {
-      this.checkPassword(employee, loginInput.password);
+    if (employeeToVerify) {
+      const employee = await this.verifyEmployee(
+        employeeToVerify,
+        loginInput.password,
+      );
       if (employee.isVerified) {
+        await this._repository.updateOneById(employeeToVerify.id, employee);
         return await this.generateToken(employee);
+      } else {
+        throw new TestProjectValidationException('Employee is not verified');
       }
     }
   }
@@ -53,15 +60,24 @@ export class AuthService extends AbstractAuthService {
     }
   }
 
-  private checkPassword(employee: IEmployee, password: string): IEmployee {
-    bcrypt.compare(
-      password,
-      employee.password,
-      (err: Error, result: boolean) => {
-        employee.isVerified = result;
-      },
-    );
-    return employee;
+  private async verifyEmployee(
+    employee: IEmployee,
+    password: string,
+  ): Promise<IEmployee> {
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(
+        password,
+        employee.password,
+        (err: Error, result: boolean) => {
+          if (err) {
+            reject(err);
+          } else {
+            employee.isVerified = result;
+            resolve(employee);
+          }
+        },
+      );
+    });
   }
 
   private async generateToken(employee: IEmployee): Promise<IToken> {

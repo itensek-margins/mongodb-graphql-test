@@ -45,7 +45,7 @@ export class EmployeeInput implements IEmployee {
   )
   password: string;
 
-  @Field({ nullable: false, defaultValue: false })
-  @IsString({ message: 'Address should be a string' })
+  @Field({ nullable: true, defaultValue: false })
+  @IsOptional()
   isVerified: boolean;
 }

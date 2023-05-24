@@ -1,8 +1,6 @@
 import { Mutation, Resolver, Query, Args } from '@nestjs/graphql';
 import { LoginInput } from './dto/login.dto';
 import { AbstractAuthResolver } from './abstract/auth.abstract.resolver';
-import { ILogin } from './interface/login.interface';
-import { IToken } from './interface/token.interface';
 import { AbstractAuthService } from './abstract/auth.abstract.service';
 import { TokenModel } from './dto/token.model';
 
@@ -13,7 +11,7 @@ export class AuthResolver extends AbstractAuthResolver {
   }
 
   @Mutation(() => TokenModel, { name: 'login' })
-  async login(@Args('loginInput') loginInput: ILogin): Promise<IToken> {
+  async login(@Args('loginInput') loginInput: LoginInput): Promise<TokenModel> {
     return this._service.login(loginInput);
   }
 
@@ -23,7 +21,7 @@ export class AuthResolver extends AbstractAuthResolver {
   }
 
   @Mutation(() => Boolean, { name: 'logout' })
-  async logout(@Args('userId') employeeId: string): Promise<boolean> {
+  async logout(@Args('employeeId') employeeId: string): Promise<boolean> {
     return await this._service.logout(employeeId);
   }
 }

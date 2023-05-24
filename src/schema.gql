@@ -9,18 +9,25 @@ type EmployeeModel {
   email: String!
   address: String
   password: String!
-  isVerified: Boolean!
+  isVerified: Boolean
+}
+
+type TokenModel {
+  accessToken: String!
 }
 
 type Query {
   getEmployees: [EmployeeModel!]!
   getEmployee(id: String!): EmployeeModel!
+  validateToken(token: String!): String!
 }
 
 type Mutation {
   createEmployee(employeeInput: EmployeeInput!): EmployeeModel!
   updateEmployee(id: String!, employeeInput: EmployeeUpdateInput!): EmployeeModel!
   deleteEmployee(id: String!): EmployeeModel!
+  login(loginInput: LoginInput!): TokenModel!
+  logout(employeeId: String!): Boolean!
 }
 
 input EmployeeInput {
@@ -29,7 +36,7 @@ input EmployeeInput {
   email: String!
   address: String
   password: String!
-  isVerified: Boolean! = false
+  isVerified: Boolean = false
 }
 
 input EmployeeUpdateInput {
@@ -37,5 +44,10 @@ input EmployeeUpdateInput {
   age: Float
   email: String
   address: String
+  password: String!
+}
+
+input LoginInput {
+  email: String!
   password: String!
 }
