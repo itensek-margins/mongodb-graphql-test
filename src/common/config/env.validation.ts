@@ -19,9 +19,14 @@ export class AppConfig {
 export class DbConfig {
   @IsString()
   public readonly DB_URI!: string;
+}
+
+export class JwtConfig {
+  @IsString()
+  public readonly JWT_SECRET!: string;
 
   @IsString()
-  public readonly SECRET_KEY!: string;
+  public readonly JWT_EXPIRATION!: string;
 }
 
 export class RootConfig {
@@ -32,4 +37,8 @@ export class RootConfig {
   @Type(() => DbConfig)
   @ValidateNested()
   public readonly database!: DbConfig;
+
+  @Type(() => JwtConfig)
+  @ValidateNested()
+  public readonly jwt!: JwtConfig;
 }

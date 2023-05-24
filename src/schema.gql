@@ -8,6 +8,8 @@ type EmployeeModel {
   age: Float!
   email: String!
   address: String
+  password: String!
+  isVerified: Boolean!
 }
 
 type Query {
@@ -26,6 +28,8 @@ input EmployeeInput {
   age: Float!
   email: String!
   address: String
+  password: String!
+  isVerified: Boolean! = false
 }
 
 input EmployeeUpdateInput {
@@ -33,4 +37,5 @@ input EmployeeUpdateInput {
   age: Float
   email: String
   address: String
+  password: String!
 }

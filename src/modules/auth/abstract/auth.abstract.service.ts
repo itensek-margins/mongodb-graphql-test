@@ -1,5 +1,7 @@
 import { Logger } from '@nestjs/common';
 import { AbstractEmployeeRepository } from 'src/modules/employee/abstract/employee.abstract.repository';
+import { ILogin } from '../interface/login.interface';
+import { IToken } from '../interface/token.interface';
 
 export abstract class AbstractAuthService {
   protected constructor(
@@ -7,6 +9,7 @@ export abstract class AbstractAuthService {
     protected readonly _repository: AbstractEmployeeRepository,
   ) {}
 
-  abstract login(...args: any[]): Promise<void>;
-  abstract logout(...args: any[]): Promise<void>;
+  abstract login(loginInput: ILogin): Promise<IToken>;
+  abstract validateAccessToken(accessToken: string): Promise<any>;
+  abstract logout(employeeId: string): Promise<boolean>;
 }

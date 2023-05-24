@@ -16,6 +16,7 @@ import {
   ApolloServerPluginLandingPageLocalDefault,
   ApolloServerPluginLandingPageProductionDefault,
 } from '@apollo/server/plugin/landingPage/default';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -57,6 +58,7 @@ import {
     }),
     // modules
     EmployeeModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
