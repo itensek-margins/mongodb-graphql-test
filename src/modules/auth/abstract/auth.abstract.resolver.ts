@@ -7,5 +7,4 @@ export abstract class AbstractAuthResolver {
 
   abstract login(loginInput: ILogin): Promise<IToken>;
   abstract validateToken(token: string): Promise<any>;
-  abstract logout(employeeId: string): Promise<boolean>;
 }

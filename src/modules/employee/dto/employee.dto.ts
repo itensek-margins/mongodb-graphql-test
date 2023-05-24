@@ -37,15 +37,11 @@ export class EmployeeInput implements IEmployee {
   @IsString({ message: 'Password must be a string' })
   @IsNotEmpty({ message: 'Please provide password' })
   @Matches(
-    RegExp('(?=^.{8,}$)((?=.*d)|(?=.*W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$'),
+    /(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$\]\[%/^&*])[A-Za-z\d!@#$\]\[/%^&*]*$/,
     {
       message:
         'Password must be at least 8 characters long including one uppercase letter, one special character and alphanumeric characters',
     },
   )
   password: string;
-
-  @Field({ nullable: true, defaultValue: false })
-  @IsOptional()
-  isVerified: boolean;
 }

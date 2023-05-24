@@ -20,9 +20,4 @@ export class AuthResolver extends AbstractAuthResolver {
   async validateToken(@Args('token') token: string): Promise<JwtDecodedModel> {
     return this._service.validateAccessToken(token);
   }
-
-  @Mutation(() => Boolean, { name: 'logout' })
-  async logout(@Args('employeeId') employeeId: string): Promise<boolean> {
-    return await this._service.logout(employeeId);
-  }
 }

@@ -11,5 +11,4 @@ export abstract class AbstractAuthService {
 
   abstract login(loginInput: ILogin): Promise<IToken>;
   abstract validateAccessToken(accessToken: string): Promise<any>;
-  abstract logout(employeeId: string): Promise<boolean>;
 }

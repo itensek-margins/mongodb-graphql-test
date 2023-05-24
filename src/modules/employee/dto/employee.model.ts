@@ -21,7 +21,4 @@ export class EmployeeModel implements IEmployee {
 
   @Field()
   password: string;
-
-  @Field({ nullable: true })
-  isVerified?: boolean;
 }
