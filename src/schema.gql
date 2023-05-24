@@ -16,10 +16,16 @@ type TokenModel {
   accessToken: String!
 }
 
+type JwtDecodedModel {
+  email: String!
+  iat: Float!
+  exp: Float!
+}
+
 type Query {
   getEmployees: [EmployeeModel!]!
   getEmployee(id: String!): EmployeeModel!
-  validateToken(token: String!): String!
+  validateToken(token: String!): JwtDecodedModel!
 }
 
 type Mutation {

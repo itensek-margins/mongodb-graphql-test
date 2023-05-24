@@ -11,6 +11,7 @@ import {
   TestProjectNotFoundException,
   TestProjectValidationException,
 } from 'src/common/exceptions/custom.exception';
+import { JwtDecodedModel } from '../dto/jwt-decoded.model';
 
 @Injectable()
 export class AuthService extends AbstractAuthService {
@@ -51,7 +52,7 @@ export class AuthService extends AbstractAuthService {
     }
   }
 
-  async validateAccessToken(accessToken: string): Promise<any> {
+  async validateAccessToken(accessToken: string): Promise<JwtDecodedModel> {
     const decodedToken = await this.jwtService.verifyAsync(accessToken);
     if (decodedToken) {
       return decodedToken;
